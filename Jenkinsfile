@@ -12,22 +12,19 @@ def runShellCommands() {
 
 def buildDockerImage() {
     sh '''
-        docker build -t blog_ui .
-        docker images
-        docker run -p 80:80 -d blog_ui
+        sudo docker build -t blog_ui .
+        sudo docker images
+        sudo docker run -p 80:80 -d blog_ui
     '''
 }
 
 node{
     stage('gitcheckout'){
-        // Using the GitSCM class with a map of parameters to checkout the 
+        // Using the GitSCM class with a map of parameters to checkout the repo
         checkout([$class: 'GitSCM',
                   branches: [[name: '*/main']],
                   extensions: [],
                   userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
-    }
-    stage('Check Docker') {
-        sh 'which docker'
     }
     stage('build') {
         // Exectute shell command test
