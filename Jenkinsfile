@@ -7,6 +7,7 @@ def runShellCommands() {
     
     // Print the captured output to the console log
     echo "Shell output:\n${output}"
+}
 
 node{
     stage('gitcheckout'){
