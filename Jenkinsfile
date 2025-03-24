@@ -9,7 +9,7 @@ def runShellCommands() {
     def output = sh(script: '''
         sudo docker build -t blog_ui .
         sudo docker images
-        sudo docker run -p 80:80 -d blog_ui 
+        sudo docker run -p 80:80 -d blog_ui sdfdsf
     ''', returnStdout: true).trim()
     
     // Print the captured output to the console log
