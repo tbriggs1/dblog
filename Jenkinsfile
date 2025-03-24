@@ -20,7 +20,7 @@ def buildDockerImage() {
 
 node{
     stage('gitcheckout'){
-        // Using the GitSCM class with a map of parameters to checkout the repo
+        // Using the GitSCM class with a map of parameters to checkout the 
         checkout([$class: 'GitSCM',
                   branches: [[name: '*/main']],
                   extensions: [],
