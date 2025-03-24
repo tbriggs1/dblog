@@ -9,6 +9,14 @@ def runShellCommands() {
     echo "Shell output:\n${output}"
 }
 
+def buildDockerImage() {
+    sh '''
+        docker build -t blog_ui
+        docker images
+        docker run -p 80:80 -d blog_ui
+    '''
+}
+
 node{
     stage('gitcheckout'){
         // Using the GitSCM class with a map of parameters to checkout the repo
@@ -17,8 +25,8 @@ node{
                   extensions: [],
                   userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
     }
-    stage('buildit') {
+    stage('build') {
         // Exectute shell command
-        runShellCommands()
+        buildDockerImage()
     }
 }
