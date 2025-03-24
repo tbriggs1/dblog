@@ -1,8 +1,9 @@
 def runShellCommands() {
     // Capture the output of the shell commands
     def output = sh(script: '''
-        pwd
-        ls
+        docker build -t blog_ui
+        docker images
+        docker run -p 80:80 -d blog_ui
     ''', returnStdout: true).trim()
     
     // Print the captured output to the console log
@@ -27,6 +28,6 @@ node{
     }
     stage('build') {
         // Exectute shell command test
-        buildDockerImage()
+        runShellCommands()
     }
 }
