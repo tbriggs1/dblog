@@ -26,8 +26,8 @@ node{
                   extensions: [],
                   userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
     }
-    stage('Check Docker'){
-        sh 'docker version'
+    stage('Check Docker') {
+        sh 'which docker'
     }
     stage('build') {
         // Exectute shell command test
