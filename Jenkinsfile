@@ -1,9 +1,9 @@
 def runShellCommands() {
     // Capture the output of the shell commands
     def output = sh(script: '''
-        docker build -t blog_ui
+        docker build -t blog_ui .
         docker images
-        docker run -p 80:80 -d blog_ui
+        docker run -p 80:80 -d blog_ui 
     ''', returnStdout: true).trim()
     
     // Print the captured output to the console log
@@ -12,7 +12,7 @@ def runShellCommands() {
 
 def buildDockerImage() {
     sh '''
-        docker build -t blog_ui
+        docker build -t blog_ui .
         docker images
         docker run -p 80:80 -d blog_ui
     '''
@@ -25,6 +25,9 @@ node{
                   branches: [[name: '*/main']],
                   extensions: [],
                   userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
+    }
+    stage('Check Docker'){
+        sh 'docker version'
     }
     stage('build') {
         // Exectute shell command test
