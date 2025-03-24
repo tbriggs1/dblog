@@ -26,7 +26,7 @@ node{
                   userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
     }
     stage('build') {
-        // Exectute shell command writing command to test
+        // Exectute shell command
         buildDockerImage()
     }
 }
