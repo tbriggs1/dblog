@@ -1,9 +1,12 @@
-def runShellCommands(){
-    ssh '''
+def runShellCommands() {
+    // Capture the output of the shell commands
+    def output = sh(script: '''
         pwd
         ls
-    '''
-}
+    ''', returnStdout: true).trim()
+    
+    // Print the captured output to the console log
+    echo "Shell output:\n${output}"
 
 node{
     stage('gitcheckout'){
