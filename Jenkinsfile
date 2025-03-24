@@ -1,17 +1,17 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('gitcheckout'){
-            steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']])
-            }
-        }
-            stage('buildit') {
-                steps {
-                    sh '''pwd
-                        ls'''
-                }
-            }
+node{
+    stage('gitcheckout'){
+        // Using the GitSCM class with a map of parameters to checkout the repo
+        checkout([$class: 'GitSCM',
+                  branches: [[name: '*/main']],
+                  extensions: [],
+                  userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
+    }
+    stage('buildit') {
+        // Exectute shell command
+        sh '''
+            pwd
+            ls
+            echo "hello"
+        '''
     }
 }
