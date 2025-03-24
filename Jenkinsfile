@@ -1,3 +1,9 @@
+properties([
+  pipelineTriggers([
+    [$class: 'GitHubPushTrigger']
+  ])
+])
+
 def runShellCommands() {
     // Capture the output of the shell commands
     def output = sh(script: '''
