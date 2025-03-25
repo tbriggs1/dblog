@@ -4,24 +4,17 @@ properties([
   ])
 ])
 
-def runShellCommands() {
+def buildDockerImage() {
     // Capture the output of the shell commands
     def output = sh(script: '''
-        sudo docker build -t blog_ui .
-        sudo docker images
-        sudo docker run -p 80:80 -d blog_ui s
+        docker build -t blog_ui .
+        docker images
+        docker run -p 80:80 -d blog_ui
     ''', returnStdout: true).trim()
     
     // Print the captured output to the console log
     echo "Shell output:\n${output}"
 }
-
-def buildDockerImage() {
-    sh '''
-        sudo docker build -t blog_ui .
-        sudo docker images
-        sudo docker run -p 80:80 -d blog_ui
-    '''
 }
 
 node{
@@ -34,6 +27,6 @@ node{
     }
     stage('build') {
         // Exectute shell command test
-        runShellCommands()
+        buildDockerImage()
     }
 }
