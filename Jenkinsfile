@@ -9,7 +9,6 @@ def buildDockerImage() {
     def output = sh(script: '''
         docker build -t blog_ui .
         docker images
-        docker run -p 80:80 -d blog_ui
     ''', returnStdout: true).trim()
     
     // Print the captured output to the console log
@@ -25,12 +24,27 @@ def gitCheckout(gitUrl) {
 
 
 node{
-    stage('gitcheckout'){
+    stage('codeCheckout'){
         // Using the GitSCM class with a map of parameters to checkout the repo
         gitCheckout('https://github.com/tbriggs1/dblog')
+    }
+    stage('printLS') {
+        sh '''
+            pwd
+            ls
+        '''
     }
     stage('build') {
         // Exectute shell command test
         buildDockerImage()
+    }
+    stage('terraformCheckout') {
+        gitCheckout('https://github.com/tbriggs1/dblog_infra')
+    }
+    stage('printWD') {
+        sh '''
+            pwd
+            ls
+        '''
     }
 }
