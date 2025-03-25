@@ -16,19 +16,18 @@ def buildDockerImage() {
     echo "Shell output:\n${output}"
 }
 
+def gitCheckout(gitUrl) {
+    checkout([$class: 'GitSCM',
+                  branches: [[name: '*/main']],
+                  extensions: [],
+                  userRemoteConfigs: [[url: gitUrl]]])
+}
+
 
 node{
     stage('gitcheckout'){
         // Using the GitSCM class with a map of parameters to checkout the repo
-        checkout([$class: 'GitSCM',
-                  branches: [[name: '*/main']],
-                  extensions: [],
-                  userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
-    }
-    stage('what user'){
-        sh '''
-            whoami && id
-        '''
+        gitCheckout('https://github.com/tbriggs1/dblog')
     }
     stage('build') {
         // Exectute shell command test
