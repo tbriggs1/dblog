@@ -45,7 +45,7 @@ node{
         sh '''
             docker save -o blog_ui.tar blog_ui
             scp -i /var/lib/jenkins/tom.pem -o StrictHostKeyChecking=no blog_ui.tar ubuntu@dev.tom-briggs.com:/home/ubuntu
-            ssh -tt -i tom.pem -o StrictHostKeyChecking=no ubuntu@dev.tom-briggs.com "sudo docker load -i blog_ui.tar"
+            ssh -tt -i /var/lib/jenkins/tom.pem -o StrictHostKeyChecking=no ubuntu@dev.tom-briggs.com "sudo docker load -i blog_ui.tar"
             sudo docker load /home/ubuntu/blog_ui.tar
             sudo docker run -d -p 80:80 blog_ui
         '''
