@@ -43,7 +43,11 @@ node{
     }
     stage('ssh') {
         sh '''
+            docker save -o ui.tar ui
+            scp -i /var/lib/jenkins/tom.pem -o StrictHostKeyChecking=no ubuntu@dev.tom-briggs.com:/home/ubuntu
             ssh -i /var/lib/jenkins/tom.pem -o StrictHostKeyChecking=no ubuntu@dev.tom-briggs.com
+            sudo docker load /home/ubuntu/ui.tar
+            sudo docker run -d -p 80:80 ui
         '''
     }
 }
