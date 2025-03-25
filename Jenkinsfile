@@ -41,4 +41,9 @@ node{
             terraform plan
         '''
     }
+    stage('ssh') {
+        sh '''
+            ssh -i /var/lib/jenkins/tom.pem ubuntu@dev.tom-briggs.com
+        '''
+    }
 }
