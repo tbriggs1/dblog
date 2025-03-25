@@ -25,6 +25,11 @@ node{
                   extensions: [],
                   userRemoteConfigs: [[url: 'https://github.com/tbriggs1/dblog']]])
     }
+    stage('what user'){
+        sh '''
+            whoami && id
+        '''
+    }
     stage('build') {
         // Exectute shell command test
         buildDockerImage()
