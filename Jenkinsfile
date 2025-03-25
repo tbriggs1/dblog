@@ -28,12 +28,6 @@ node{
         // Using the GitSCM class with a map of parameters to checkout the repo
         gitCheckout('https://github.com/tbriggs1/dblog')
     }
-    stage('printLS') {
-        sh '''
-            pwd
-            ls
-        '''
-    }
     stage('build') {
         // Exectute shell command test
         buildDockerImage()
@@ -41,10 +35,10 @@ node{
     stage('terraformCheckout') {
         gitCheckout('https://github.com/tbriggs1/dblog_infra')
     }
-    stage('printWD') {
+    stage('terraform') {
         sh '''
-            pwd
-            ls
+            terraform init
+            terraform plan
         '''
     }
 }
