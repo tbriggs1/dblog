@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import tom from '../../assets/images/tom.png'
+import devops from '../../assets/images/devpos.png'
 
 const BlogPreview = () => {
   return (
@@ -17,7 +17,7 @@ const BlogPreview = () => {
             <Row className="g-0 align-items-center">
               <Col md={5}>
                 <Card.Img
-                  src={tom}
+                  src={devops}
                   alt="Why I Got Into DevOps"
                   className="img-fluid"
                 />
