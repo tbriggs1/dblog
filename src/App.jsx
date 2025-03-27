@@ -1,17 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import BlogList from './features/Blog/BlogList';
+import { getBlogPosts } from './services/blogAPI';
 import './App.css'
-import Homepage from './pages/Homepage'
+import Blog from './features/Blog/Blog';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getBlogPosts().then(setPosts);
+  }, []);
 
   return (
-    <>
-      <Homepage/>
-    </>
-  )
+    <Routes>
+      <Route
+        path="/"
+        element={posts.length > 0 && <Homepage latestPost={posts[0]} />}
+      />
+      <Route
+        path="/blog"
+        element={<BlogList blogPosts={posts} />}
+      />
+      <Route path="/blog/:id" element={<Blog/>} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

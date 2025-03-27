@@ -6,14 +6,14 @@ import CertificationGrid from "../features/Home/CertificationGrid";
 import BlogPreview from "../features/Home/BlogPreview";
 import Footer from "../components/Footer/Footer";
 
-const Homepage = () => {
+const Homepage = ({ latestPost }) => {
     return(
         <div>
             <NavBar/>
             <HomeHero />
             <ServiceGrid />
             <CertificationGrid />
-            <BlogPreview />
+            <BlogPreview post={latestPost} />
             <Footer />
         </div>
     );

@@ -4,9 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import devops from '../../assets/images/devpos.png'
+import { Link } from 'react-router-dom';
 
-const BlogPreview = () => {
+
+const BlogPreview = ({post}) => {
   return (
     <Container className="my-5">
       <h3 className="text-center mb-4">Check out my latest blog</h3>
@@ -17,21 +18,24 @@ const BlogPreview = () => {
             <Row className="g-0 align-items-center">
               <Col md={5}>
                 <Card.Img
-                  src={devops}
+                  src={post.image}
                   alt="Why I Got Into DevOps"
                   className="img-fluid"
                 />
               </Col>
               <Col md={7}>
                 <Card.Body>
-                  <Card.Title>Why I Got Into DevOps</Card.Title>
+                  <Card.Title>{post.title}</Card.Title>
                   <Card.Text className="text-muted">
-                    A short reflection on what drew me to DevOps — combining development, automation,
-                    and infrastructure into one powerful career path.
-                  </Card.Text>
-                  <Button variant="primary" disabled>
-                    Read More (Coming Soon)
-                  </Button>
+                  {post.content.length > 150
+                    ? `${post.content.slice(0, 150)}...`
+                    : post.content}
+                </Card.Text>
+                <Link to={`/blog/${post.id}`}>
+                <Button variant="primary">
+                  Read More
+                </Button>
+              </Link>
                 </Card.Body>
               </Col>
             </Row>
