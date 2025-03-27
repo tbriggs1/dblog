@@ -26,7 +26,7 @@ def gitCheckout(gitUrl) {
 node{
     try {
         stage('codeCheckout'){
-            // Using the GitSCM class with a map of parameters to checkout the repo
+            // Using the GitSCM class with a map of parameters to checkout the repotest
             gitCheckout('https://github.com/tbriggs1/dblog')
         }
         stage('build') {
