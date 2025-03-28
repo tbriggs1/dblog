@@ -9,7 +9,7 @@ function Blog() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/blogposts/${id}/`)
+    axios.get(`/api/blogposts/${id}/`)
       .then(res => setPost(res.data))
       .catch(err => console.error(err));
   }, [id]);
